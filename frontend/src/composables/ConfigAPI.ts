@@ -351,7 +351,7 @@ export async function loadConfig(): Promise<FrontendSettings> {
         data['Transcription Engine']?.openai_base_url || 'https://api.openai.com/v1',
       // Remote VidGo Service settings
       remoteVidGoHost: data['Remote VidGo Service']?.host || '',
-      remoteVidGoPort: data['Remote VidGo Service']?.port || '8000',
+      remoteVidGoPort: data['Remote VidGo Service']?.port || '9000',
       remoteVidGoUseSsl: data['Remote VidGo Service']?.use_ssl === 'true',
       // OSS Service settings
       ossAccessKeyId: data['OSS Service']?.oss_access_key_id || '',

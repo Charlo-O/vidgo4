@@ -3,7 +3,7 @@ set -euo pipefail
 
 mkdir -p ./logs
 
-export PORT="${PORT:-8000}"
+export PORT="${PORT:-9000}"
 export VIDGO_URL="${VIDGO_URL:-https://vidgo.cemp.top}"
 
 # 你的项目用的是 vid_go.settings -> 对应的 WSGI 入口如下

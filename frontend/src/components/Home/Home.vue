@@ -879,7 +879,7 @@ onMounted(() => {
           </div>
           <!-- File upload is handled by StreamMediaCard component -->
 
-          <TasksView />
+          <TasksView @download-completed="fetchVideoData" />
         </div>
       </template>
 

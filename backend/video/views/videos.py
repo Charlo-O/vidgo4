@@ -286,7 +286,7 @@ class VideoDataView(JsonView):
         return {
             "id": v.id,
             "name": v.name,
-            "thumbnail": f"img/{v.thumbnail_url}",
+            "thumbnail": f"thumbnail/{v.thumbnail_url}",
             "url": v.url,
             "length": v.video_length,
             "last_modified": calc_diff_time(v.last_modified or timezone.now()),
@@ -296,7 +296,7 @@ class VideoDataView(JsonView):
         return {
             "id": col.id,
             "name": col.name,
-            "thumbnail": f"img/{col.thumbnail_url}",
+            "thumbnail": f"thumbnail/{col.thumbnail_url}",
             "videos": [self.video_json(v) for v in col.videos.all()],
             "last_modified": calc_diff_time(col.last_modified or timezone.now()),
         }
@@ -379,7 +379,7 @@ class LastVideoDataView(JsonView):
         return {
             "id": v.id,
             "name": v.name,
-            "thumbnail": f"img/{v.thumbnail_url}",
+            "thumbnail": f"thumbnail/{v.thumbnail_url}",
             "url": v.url,
             "length": v.video_length,
             "last_modified": calc_diff_time(v.last_modified if v.last_modified else timezone.now()),

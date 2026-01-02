@@ -48,10 +48,8 @@ def _new_download_status():
         "finished": False,
     }
 
+@method_decorator(csrf_exempt, name='dispatch')
 class InfoView(View):
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
-    @csrf_exempt
     def post(self, request):
         # 1) 先解析 JSON body获取url参数。
         try:
@@ -180,6 +178,7 @@ class InfoView(View):
 
 
 from django.http import HttpResponseBadRequest
+@method_decorator(csrf_exempt, name='dispatch')
 class DownloadActionView(View):
     def dispatch(self, request, *args, **kwargs):
         self.action = kwargs.pop('action', None)

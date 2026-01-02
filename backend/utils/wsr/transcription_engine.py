@@ -270,7 +270,7 @@ class RemoteVidGoEngine(TranscriptionEngine):
         super().__init__(config)
         remote_config = config.get('Remote VidGo Service', {})
         self.host = remote_config.get('host', '').strip()
-        self.port = remote_config.get('port', '8000')
+        self.port = remote_config.get('port', '9000')
         self.use_ssl = remote_config.get('use_ssl', 'false').lower() == 'true'
         
         # Build base URL

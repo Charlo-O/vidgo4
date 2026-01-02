@@ -1040,7 +1040,7 @@
                   v-model="settings.remoteVidGoPort"
                   type="number"
                   class="w-full p-2 border border-gray-300 rounded-md"
-                  placeholder="8000"
+                  placeholder="9000"
                 />
               </div>
 
@@ -1494,7 +1494,7 @@ const settings = reactive<FrontendSettings>({
   transcriptionOpenaiBaseUrl: 'https://api.openai.com/v1',
   // Remote VidGo Service settings
   remoteVidGoHost: '',
-  remoteVidGoPort: '8000',
+  remoteVidGoPort: '9000',
   remoteVidGoUseSsl: false,
 })
 
@@ -1765,7 +1765,7 @@ const resetSettings = () => {
     transcriptionOpenaiBaseUrl: 'https://api.openai.com/v1',
     // Remote VidGo Service settings
     remoteVidGoHost: '',
-    remoteVidGoPort: '8000',
+    remoteVidGoPort: '9000',
     remoteVidGoUseSsl: false,
   })
 }

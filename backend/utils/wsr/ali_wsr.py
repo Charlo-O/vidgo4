@@ -12,11 +12,15 @@ def ms_to_srt_time(ms: int) -> str:
 
 def json_to_word_srt(data: list) -> str:
     """
-    把句级JSON转为逐字SRT字符串
+    把句级JSON转为短字幕SRT字符串（按标点符号分割，每条字幕1-3秒）
     data: list of sentence dicts
     """
     srt_lines = []
     counter = 1
+    
+    # 定义用于分割的标点符号
+    SPLIT_PUNCTUATION = {'。', '，', '！', '？', '；', '：', '、', '.', ',', '!', '?', ';', ':'}
+    MAX_DURATION_MS = 3000  # 最大持续时间3秒
 
     print(f"[DEBUG] json_to_word_srt input: {type(data)}, length: {len(data) if isinstance(data, list) else 'N/A'}")
     
@@ -27,13 +31,18 @@ def json_to_word_srt(data: list) -> str:
     for idx, sentence in enumerate(data):
         words = sentence.get("words", [])
         
+        if not words:
+            continue
+        
+        # 按标点符号或时间间隔分割成多个短字幕
+        current_chunk = []
+        chunk_start_time = words[0]["begin_time"]
+        
         for word in words:
-            start = ms_to_srt_time(word["begin_time"])
-            end = ms_to_srt_time(word["end_time"])
-            
-            # 确保文本是正确的UTF-8编码
-            text = word["text"]
+            text = word.get("text", "")
             punctuation = word.get("punctuation") or ""
+            begin_time = word.get("begin_time", 0)
+            end_time = word.get("end_time", 0)
             
             # 尝试修复编码问题
             try:
@@ -44,13 +53,54 @@ def json_to_word_srt(data: list) -> str:
             except Exception as e:
                 print(f"[DEBUG] Encoding fix for text failed: {e}")
             
-            full_text = (text + punctuation).strip()
+            current_chunk.append({
+                'text': text,
+                'punctuation': punctuation,
+                'begin_time': begin_time,
+                'end_time': end_time
+            })
             
-            srt_lines.append(f"{counter}")
-            srt_lines.append(f"{start} --> {end}")
-            srt_lines.append(full_text)
-            srt_lines.append("")  # 空行分隔
-            counter += 1
+            # 检查是否需要分割：遇到分割标点符号或超过最大时长
+            should_split = False
+            if punctuation in SPLIT_PUNCTUATION:
+                should_split = True
+            elif (end_time - chunk_start_time) >= MAX_DURATION_MS and len(current_chunk) >= 2:
+                should_split = True
+            
+            if should_split and current_chunk:
+                # 生成一条字幕
+                chunk_text = "".join(w['text'] + w['punctuation'] for w in current_chunk).strip()
+                chunk_end_time = current_chunk[-1]['end_time']
+                
+                if chunk_text:
+                    start = ms_to_srt_time(chunk_start_time)
+                    end = ms_to_srt_time(chunk_end_time)
+                    
+                    srt_lines.append(f"{counter}")
+                    srt_lines.append(f"{start} --> {end}")
+                    srt_lines.append(chunk_text)
+                    srt_lines.append("")  # 空行分隔
+                    counter += 1
+                
+                # 重置当前块
+                current_chunk = []
+                # 下一个词的开始时间将作为新块的开始时间
+                chunk_start_time = end_time
+        
+        # 处理句子末尾剩余的词
+        if current_chunk:
+            chunk_text = "".join(w['text'] + w['punctuation'] for w in current_chunk).strip()
+            chunk_end_time = current_chunk[-1]['end_time']
+            
+            if chunk_text:
+                start = ms_to_srt_time(chunk_start_time)
+                end = ms_to_srt_time(chunk_end_time)
+                
+                srt_lines.append(f"{counter}")
+                srt_lines.append(f"{start} --> {end}")
+                srt_lines.append(chunk_text)
+                srt_lines.append("")  # 空行分隔
+                counter += 1
     
     srt_content = "\n".join(srt_lines)
     print(f"[DEBUG] Generated SRT: {counter-1} entries, length: {len(srt_content)}")

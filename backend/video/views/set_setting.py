@@ -82,7 +82,7 @@ def _ensure_ini():
         }
         cfg['Remote VidGo Service'] = {
             'host': '',
-            'port': '8000',
+            'port': '9000',
             'use_ssl': 'false'
         }
         cfg['TTS settings'] = {

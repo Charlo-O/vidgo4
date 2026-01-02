@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { ElMessage } from 'element-plus'
-import { getCookie } from '@/composables/GetCSRFToken'
+import { getCSRFToken, getCookie } from '@/composables/GetCSRFToken'
 
 import { BACKEND } from '@/composables/ConfigAPI'
 
@@ -53,9 +53,8 @@ async function setVideoLanguage() {
   }
 
   loading.value = true
-  const csrfToken = getCookie('csrftoken')
-
   try {
+    const csrfToken = await getCSRFToken()
     // 为每个视频设置语言
     for (const videoId of props.videoIdList) {
       const res = await fetch(`${BACKEND}/api/videos/${videoId}/update_raw_lang`, {
@@ -91,9 +90,8 @@ async function generateBilingualSubtitles() {
   }
 
   loading.value = true
-  const csrfToken = getCookie('csrftoken')
-
   try {
+    const csrfToken = await getCSRFToken()
     const res = await fetch(`${BACKEND}/api/tasks/subtitle_generate/add`, {
       method: 'POST',
       credentials: 'include',
@@ -131,9 +129,8 @@ async function generateTranslationOnly() {
   }
 
   loading.value = true
-  const csrfToken = getCookie('csrftoken')
-
   try {
+    const csrfToken = await getCSRFToken()
     const res = await fetch(`${BACKEND}/api/tasks/subtitle_translation/add`, {
       method: 'POST',
       credentials: 'include',

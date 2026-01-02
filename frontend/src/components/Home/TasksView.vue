@@ -109,10 +109,17 @@ const POLL_INTERVAL = 20_000 // 20 s
 // i18n functionality
 const { t } = useI18n()
 
+// Emit for notifying parent when downloads complete
+const emit = defineEmits<{
+  (e: 'download-completed'): void
+}>()
+
 const subtitleTasks = ref<TaskRow[]>([])
 const downloadTasks = ref<DownloadTaskRow[]>([])
 const exportTasks = ref<ExportTaskRow[]>([])
 const ttsTasks = ref<TTSTaskRow[]>([])
+// Track previous download tasks to detect completions
+const previousDownloadTaskIds = ref<Set<string>>(new Set())
 let timer_download: number | undefined
 let timer_subtitle: number | undefined
 let timer_export: number | undefined
@@ -144,7 +151,7 @@ async function fetchDownloadTasks() {
 
     const raw = (await res.json()) as Record<string, DownloadTaskInfo>
 
-    downloadTasks.value = Object.entries(raw).map(([id, info]) => ({
+    const newTasks = Object.entries(raw).map(([id, info]) => ({
       id: id,
       bvid: info.bvid,
       fileName: info.title,
@@ -153,6 +160,25 @@ async function fetchDownloadTasks() {
       merge: info.stages.merge,
       totalProgress: info.total_progress || 0,  // 🆕 总进度
     }))
+
+    // Check if any previous tasks have completed (disappeared from list or merge is Completed)
+    const currentTaskIds = new Set(newTasks.map(t => t.id))
+    const completedTasks = [...previousDownloadTaskIds.value].filter(id => !currentTaskIds.has(id))
+    
+    // Also check for newly completed tasks (merge stage changed to Completed)
+    const prevMergeStatus = new Map(downloadTasks.value.map(t => [t.id, t.merge]))
+    const newlyCompleted = newTasks.filter(t => 
+      t.merge === 'Completed' && prevMergeStatus.get(t.id) !== 'Completed'
+    )
+
+    if (completedTasks.length > 0 || newlyCompleted.length > 0) {
+      console.log('[TasksView] Download completed, emitting refresh event')
+      emit('download-completed')
+    }
+
+    // Update previous task IDs for next comparison
+    previousDownloadTaskIds.value = currentTaskIds
+    downloadTasks.value = newTasks
   } catch (err) {
     ElMessage.error(`${t('taskListFailed')}：${err}`)
   }

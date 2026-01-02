@@ -72,20 +72,31 @@ class MediaActionView(View):
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, filename):
-        if self.type == 'video':
+        # 处理不同类型的媒体请求
+        media_type = self.type
+        
+        # 特殊处理：将 'video' 映射到 'saved_video' 目录
+        if media_type == 'video':
             return self.serve_video(request, filename)
-        elif self.type == 'audio':          # ← add this branch
+        # 特殊处理：将 'audio' 映射到 'saved_audio' 目录
+        elif media_type == 'audio':          # ← add this branch
             return self.serve_audio(request, filename)
-        elif self.type == 'img':
+        elif media_type == 'img':
             return self.serve_img(request, filename)
-        elif self.type == 'screenshot':
+        elif media_type == 'screenshot':
             return self.serve_screenshot(request, filename)
-        elif self.type == 'note_image':
+        elif media_type == 'note_image':
             return self.serve_note_image(request, filename)
-        elif self.type == 'attachments':
+        elif media_type == 'attachments':
             return self.serve_attachments(request, filename)
-        elif self.type == 'stream_video':
+        elif media_type == 'stream_video':
             return self.serve_stream_video(request, filename)
+        elif media_type == 'saved_video':
+            # 直接处理 saved_video 类型
+            return self.serve_video(request, filename)
+        elif media_type == 'saved_audio':
+            # 直接处理 saved_audio 类型
+            return self.serve_audio(request, filename)
         
         return HttpResponseNotAllowed(['GET'])
     # Memory-efficient chunked streaming for large video files

@@ -146,6 +146,7 @@ class SubtitleActionView(View):
 
 
 ##** 字幕生成任务 **##
+@method_decorator(csrf_exempt, name="dispatch")
 class SubtitleGenerationAddView(View):
     def dispatch(self, request, *args, **kwargs):
         self.action = kwargs.pop('action', None)
@@ -197,6 +198,7 @@ class SubtitleGenerationAddView(View):
         return JsonResponse({"success": True})
 
 # 重试 / 删除
+@method_decorator(csrf_exempt, name="dispatch")
 class SubtitleGenerationTaskView(View):
     def dispatch(self, request, *args, **kwargs):
         self.action = kwargs.pop('action', None)
