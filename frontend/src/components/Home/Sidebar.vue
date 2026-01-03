@@ -296,15 +296,18 @@ const emit = defineEmits<{
 
 <template>
   <div
-    class="sidebar bg-gradient-to-br from-gray-900 via-slate-900 to-blue-900 backdrop-blur-xl border-r border-white/20 flex flex-col h-full transition-all duration-300"
-    :class="collapsed ? 'sidebar-collapsed' : 'sidebar-expanded'"
+    class="sidebar backdrop-blur-xl border-r flex flex-col h-full transition-all duration-300"
+    :class="[
+      collapsed ? 'sidebar-collapsed' : 'sidebar-expanded',
+      'bg-gradient-to-b from-[#f8f9ff] via-white to-[#f1f5f9] border-slate-200/60'
+    ]"
   >
     <!--缩起版 侧边栏-->
     <div v-if="collapsed" class="flex flex-col items-center py-6 space-y-6 flex-none px-2">
       <el-tooltip :content="t('displaySidebar')" placement="right">
         <button
           @click="toggleCollapse"
-          class="text-white/70 hover:text-white p-2 rounded-lg hover:bg-white/10 transition-all"
+          class="text-slate-500 hover:text-indigo-600 p-2 rounded-xl hover:bg-indigo-50 transition-all duration-200"
         >
           <LibraryBig :size="20" />
         </button>
@@ -312,7 +315,7 @@ const emit = defineEmits<{
       <el-tooltip :content="t('home')" placement="right">
         <button
           @click="emit('updateMenuIndex', 0)"
-          class="text-white/70 hover:text-white p-2 rounded-lg hover:bg-white/10 transition-all"
+          class="text-slate-500 hover:text-indigo-600 p-2 rounded-xl hover:bg-indigo-50 transition-all duration-200"
         >
           <Home :size="20" />
         </button>
@@ -320,7 +323,7 @@ const emit = defineEmits<{
       <el-tooltip content="Search (Ctrl+K)" placement="right">
         <button
           @click="openSearch"
-          class="text-white/70 hover:text-white p-2 rounded-lg hover:bg-white/10 transition-all"
+          class="text-slate-500 hover:text-indigo-600 p-2 rounded-xl hover:bg-indigo-50 transition-all duration-200"
         >
           <LucideSearch :size="20" />
         </button>
@@ -330,18 +333,18 @@ const emit = defineEmits<{
     <!-- 展开版 侧边栏 -->
     <template v-if="!collapsed">
       <!-- 加个空行美化排版 -->
-      <div class="py-2"></div>
-      <nav class="flex-1 overflow-y-auto px-2">
+      <div class="py-3"></div>
+      <nav class="flex-1 overflow-y-auto px-3 scrollbar-premium">
         <!-- Menu items -->
-        <div class="space-y-2 mb-6">
+        <div class="space-y-1.5 mb-6">
           <div
             v-for="(item, i) in menuList"
             :key="i"
-            class="flex items-center p-3 rounded-xl cursor-pointer backdrop-blur-sm border border-white/10 shadow-sm transition-all duration-200"
+            class="flex items-center p-3 rounded-2xl cursor-pointer border transition-all duration-200"
             :class="
               props.currentMenuIdx === i
-                ? 'bg-white/20 text-white border-white/30 shadow-lg'
-                : 'hover:bg-white/10 text-white/80 hover:border-white/20 hover:shadow-md'
+                ? 'bg-gradient-to-r from-indigo-500 to-violet-500 text-white border-transparent shadow-lg shadow-indigo-200'
+                : 'hover:bg-indigo-50 text-slate-600 hover:text-indigo-600 border-transparent hover:border-indigo-100'
             "
             @click="item.action()"
           >
@@ -365,14 +368,14 @@ const emit = defineEmits<{
         <!-- 分类 - 只在用户登录时显示 -->
         <template v-if="currentUser">
           <h6
-            class="mb-4 flex items-center justify-between text-xs font-semibold text-white/60 tracking-wide"
+            class="mb-4 flex items-center justify-between text-xs font-semibold text-slate-400 tracking-wider uppercase"
           >
             <div>{{ t('categories') }} ({{ props.categories.length }})</div>
             <div class="flex items-center space-x-1">
               <el-tooltip :content="t('refreshVideoData')" placement="top">
                 <button
                   @click="emit('refresh')"
-                  class="text-white/50 hover:text-white/80 p-1 rounded hover:bg-white/10 transition-all"
+                  class="text-slate-400 hover:text-indigo-600 p-1.5 rounded-lg hover:bg-indigo-50 transition-all duration-200"
                 >
                   <RefreshCw :size="14" />
                 </button>
@@ -380,22 +383,22 @@ const emit = defineEmits<{
               <el-tooltip :content="t('addCategory')" placement="top">
                 <button
                   @click="createCategory"
-                  class="text-white/50 hover:text-white/80 p-1 rounded hover:bg-white/10 transition-all"
+                  class="text-slate-400 hover:text-indigo-600 p-1.5 rounded-lg hover:bg-indigo-50 transition-all duration-200"
                 >
                   <Plus :size="14" />
                 </button>
               </el-tooltip>
             </div>
           </h6>
-          <div class="flex-1 overflow-y-auto">
+          <div class="flex-1 overflow-y-auto space-y-1">
             <div
               v-for="category in props.categories"
               :key="category.id"
-              class="group p-3 mb-2 rounded-xl flex items-center cursor-pointer relative backdrop-blur-sm border border-white/10 shadow-sm transition-all duration-200"
+              class="group p-3 mb-1 rounded-2xl flex items-center cursor-pointer relative border transition-all duration-200"
               :class="
                 category.id === selectedCategoryId
-                  ? 'bg-white/25 text-white border-white/30 shadow-lg transform translate-x-1'
-                  : 'hover:bg-white/15 text-white/90 hover:border-white/20 hover:shadow-md hover:transform hover:translate-x-0.5'
+                  ? 'bg-indigo-50 text-indigo-700 border-indigo-200 shadow-sm'
+                  : 'hover:bg-slate-50 text-slate-600 border-transparent hover:border-slate-200'
               "
               @click="selectCategory(category.id)"
             >
@@ -405,7 +408,7 @@ const emit = defineEmits<{
                     <FolderOpen :size="16" class="mr-3" />
                   </template>
                   <template v-else>
-                    <div class="w-2 h-2 rounded-full bg-blue-400 mr-3"></div>
+                    <div class="w-2 h-2 rounded-full bg-gradient-to-r from-indigo-400 to-violet-400 mr-3"></div>
                   </template>
                   <template v-if="editingCategoryId !== category.id">
                     <span class="font-medium">{{ category.name }}</span>
@@ -416,7 +419,7 @@ const emit = defineEmits<{
                       @keyup.enter="finishEdit(category)"
                       @blur="editingCategoryId = null"
                       @click.stop
-                      class="ml-2 border-b border-white/30 focus:outline-none bg-transparent text-white placeholder-white/50"
+                      class="ml-2 px-2 py-1 border border-indigo-200 rounded-lg focus:outline-none focus:border-indigo-400 bg-white text-slate-700 placeholder-slate-400"
                     />
                   </template>
                 </div>
@@ -430,7 +433,7 @@ const emit = defineEmits<{
                   class="more-dropdown"
                 >
                   <button
-                    class="text-white/40 hover:text-white/80 p-1 opacity-0 group-hover:opacity-100 transition-all duration-200 rounded hover:bg-white/10"
+                    class="text-slate-400 hover:text-indigo-600 p-1 opacity-0 group-hover:opacity-100 transition-all duration-200 rounded-lg hover:bg-indigo-50"
                   >
                     <MoreHorizontal :size="14" />
                   </button>
@@ -454,8 +457,10 @@ const emit = defineEmits<{
         <!-- 未登录状态提示 -->
         <template v-else>
           <div class="flex-1 flex items-center justify-center">
-            <div class="text-center text-white/60 p-6">
-              <User :size="48" class="mx-auto mb-4 opacity-50" />
+            <div class="text-center text-slate-400 p-6">
+              <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-slate-100 flex items-center justify-center">
+                <User :size="32" class="text-slate-400" />
+              </div>
               <p class="text-sm">{{ t('loginToViewCategories') }}</p>
             </div>
           </div>
@@ -463,24 +468,24 @@ const emit = defineEmits<{
       </nav>
 
       <!-- User Status Area -->
-      <div class="px-4 py-2 backdrop-blur-sm bg-white/5 border-t border-white/10">
+      <div class="px-3 py-2 border-t border-slate-200/60">
         <div
           @click="handleUserAreaClick"
           @touchstart="handleUserAreaClick"
           @touchend.prevent
-          class="flex items-center p-3 rounded-xl cursor-pointer backdrop-blur-sm border border-white/10 hover:bg-white/10 active:bg-white/20 transition-all duration-200 relative"
+          class="flex items-center p-3 rounded-2xl cursor-pointer border border-transparent hover:bg-indigo-50 hover:border-indigo-100 active:bg-indigo-100 transition-all duration-200 relative"
         >
           <div
-            class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center"
+            class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 via-violet-500 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-200"
           >
             <User :size="16" class="text-white" />
           </div>
           <div class="ml-3 flex-1">
-            <div v-if="currentUser" class="text-sm font-medium text-white">
+            <div v-if="currentUser" class="text-sm font-semibold text-slate-700">
               {{ currentUser.username }}
             </div>
-            <div v-else class="text-sm font-medium text-white">{{ t('notLoggedIn') }}</div>
-            <div class="text-xs text-white/50">
+            <div v-else class="text-sm font-semibold text-slate-700">{{ t('notLoggedIn') }}</div>
+            <div class="text-xs text-slate-400">
               {{
                 currentUser
                   ? currentUser.is_root
@@ -493,7 +498,7 @@ const emit = defineEmits<{
           <ChevronUp
             v-if="currentUser"
             :size="16"
-            class="text-white/60 transition-transform duration-200"
+            class="text-slate-400 transition-transform duration-200"
             :class="{ 'rotate-180': showUserDropdown }"
           />
         </div>
@@ -501,44 +506,44 @@ const emit = defineEmits<{
         <!-- User Dropdown -->
         <div
           v-if="currentUser && showUserDropdown"
-          class="mt-2 bg-white/10 backdrop-blur-md rounded-xl border border-white/20 overflow-hidden"
+          class="mt-2 bg-white rounded-2xl border border-slate-200 shadow-glass overflow-hidden"
         >
           <div
             v-if="currentUser.is_root"
             @click="handleUserManagementClick"
-            class="flex items-center px-3 py-2 hover:bg-white/10 cursor-pointer transition-colors"
+            class="flex items-center px-4 py-3 hover:bg-indigo-50 cursor-pointer transition-colors"
           >
-            <UserPlus :size="14" class="text-white/80 mr-3" />
-            <span class="text-sm text-white/90">{{ t('userManagement') }}</span>
+            <UserPlus :size="14" class="text-indigo-500 mr-3" />
+            <span class="text-sm text-slate-700 font-medium">{{ t('userManagement') }}</span>
           </div>
-          <div v-else-if="currentUser" class="flex items-center px-3 py-2 text-gray-500 text-sm">
+          <div v-else-if="currentUser" class="flex items-center px-4 py-3 text-slate-400 text-sm">
             <span>调试: is_root = {{ currentUser.is_root }}</span>
           </div>
           <div
             @click="handleLogout"
-            class="flex items-center px-3 py-2 hover:bg-white/10 cursor-pointer transition-colors border-t border-white/10"
+            class="flex items-center px-4 py-3 hover:bg-red-50 cursor-pointer transition-colors border-t border-slate-100"
           >
-            <LogOut :size="14" class="text-white/80 mr-3" />
-            <span class="text-sm text-white/90">{{ t('logout') }}</span>
+            <LogOut :size="14" class="text-red-500 mr-3" />
+            <span class="text-sm text-red-600 font-medium">{{ t('logout') }}</span>
           </div>
         </div>
       </div>
 
       <!-- Bottom Logo -->
-      <div class="px-4 py-2 flex items-center backdrop-blur-sm bg-white/5 border-t border-white/10">
-        <div class="h-8 w-8 p-0.5 border border-white/30 hover:border-white/50 rounded-lg transition-all bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-          <LibraryBig :size="24" class="text-white" />
+      <div class="px-3 py-3 flex items-center border-t border-slate-200/60">
+        <div class="h-9 w-9 rounded-xl bg-gradient-to-br from-indigo-500 via-violet-500 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-200">
+          <LibraryBig :size="20" class="text-white" />
         </div>
-        <div class="ml-2 flex flex-col">
-          <span class="text-sm font-semibold text-white">VidGo</span>
-          <span class="text-xs text-white/50">v1.0</span>
+        <div class="ml-2.5 flex flex-col">
+          <span class="text-sm font-bold bg-gradient-to-r from-indigo-600 via-violet-600 to-pink-600 bg-clip-text text-transparent">VidGo</span>
+          <span class="text-xs text-slate-400">v1.0</span>
         </div>
         <el-tooltip :content="t('hideSidebar')" placement="bottom">
           <button
             @click="toggleCollapse"
-            class="ml-auto text-white/60 hover:text-white p-2 rounded-lg hover:bg-white/10 transition-all"
+            class="ml-auto text-slate-400 hover:text-indigo-600 p-2 rounded-xl hover:bg-indigo-50 transition-all duration-200"
           >
-            <LibraryBig :size="20" />
+            <LibraryBig :size="18" />
           </button>
         </el-tooltip>
       </div>

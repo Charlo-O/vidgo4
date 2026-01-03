@@ -252,20 +252,20 @@ onMounted(() => {
   <!-- 视频链接输入区域 -->
   <div class="mb-8">
     <div
-      class="bg-gradient-to-r from-slate-800/90 to-slate-700/90 backdrop-blur-lg rounded-2xl p-6 border border-slate-600/50 shadow-2xl"
+      class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm"
     >
-      <h2 class="text-xl font-bold text-white mb-6 text-center">{{ t('videoLink') }}</h2>
+      <h2 class="text-xl font-bold text-slate-800 mb-6 text-center">{{ t('videoLink') }}</h2>
 
       <!-- URL输入框区域 -->
       <div class="flex items-stretch mb-4">
         <input
           v-model="inputUrl"
           :placeholder="t('linkPlaceholder')"
-          class="flex-1 px-4 py-3 bg-slate-700/70 text-white border border-slate-600/50 border-r-0 rounded-l-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 placeholder-slate-400 transition-all"
+          class="flex-1 px-4 py-3 bg-slate-50 text-slate-800 border border-slate-200 border-r-0 rounded-l-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 placeholder-slate-400 transition-all"
         />
         <button
           @click="submitUrl"
-          class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-r-xl border border-blue-600 transition-colors flex items-center justify-center font-medium"
+          class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-r-xl border border-blue-500 transition-colors flex items-center justify-center font-medium"
         >
           {{ t('parseBtn') }}
         </button>
@@ -276,17 +276,17 @@ onMounted(() => {
       <!-- 本地文件上传区域 -->
       <div class="mt-4">
         <div
-          class="block border-2 border-dashed border-slate-600/50 rounded-xl p-8 text-center hover:border-slate-500/70 transition-colors cursor-pointer bg-slate-800/30"
+          class="block border-2 border-dashed border-slate-300 rounded-xl p-8 text-center hover:border-blue-400 transition-colors cursor-pointer bg-slate-50"
           @click="triggerFileUpload"
           @dragover.prevent
           @drop.prevent="handleDrop"
         >
           <div class="flex flex-col items-center">
             <div
-              class="w-12 h-12 rounded-full bg-slate-600/50 flex items-center justify-center mb-4"
+              class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-4"
             >
               <svg
-                class="w-6 h-6 text-slate-300"
+                class="w-6 h-6 text-blue-500"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -299,7 +299,7 @@ onMounted(() => {
                 />
               </svg>
             </div>
-            <h3 class="text-lg font-semibold text-white mb-2">{{ t('clickUploadMedia') }}</h3>
+            <h3 class="text-lg font-semibold text-slate-700 mb-2">{{ t('clickUploadMedia') }}</h3>
             <p class="text-slate-400 text-sm">{{ t('supportedFormats') }}</p>
           </div>
         </div>
@@ -319,26 +319,26 @@ onMounted(() => {
   <!-- 已解析视频卡片 -->
   <div v-if="requestVideo" class="mb-8">
     <div
-      class="bg-gradient-to-r from-slate-800/90 to-slate-700/90 backdrop-blur-lg rounded-2xl p-6 border border-slate-600/50 shadow-2xl"
+      class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm"
     >
-      <h2 class="text-xl font-bold text-white mb-6 text-center">{{ t('parsedVideo') }}</h2>
+      <h2 class="text-xl font-bold text-slate-800 mb-6 text-center">{{ t('parsedVideo') }}</h2>
 
       <div
-        class="flex items-center gap-6 p-4 bg-slate-700/50 rounded-xl border border-slate-600/30"
+        class="flex items-center gap-6 p-4 bg-slate-50 rounded-xl border border-slate-200"
       >
         <!-- 左侧缩略图 -->
         <div class="flex-shrink-0">
           <img
             :src="proxyThumbnailUrl || 'https://pic.chaopx.com/chao_water_pic/23/03/03/e78a5cf45f9ebc92411a8f9531975dec.jpg'"
             :alt="t('videoThumbnail')"
-            class="w-20 h-16 object-cover rounded-lg border border-slate-600/50"
+            class="w-20 h-16 object-cover rounded-lg border border-slate-200"
           />
         </div>
 
         <!-- 中间视频信息 -->
         <div class="flex-1 min-w-0">
-          <h3 class="text-white font-medium truncate mb-1">{{ requestVideo.title }}</h3>
-          <div class="flex items-center gap-4 text-sm text-slate-400">
+          <h3 class="text-slate-800 font-medium truncate mb-1">{{ requestVideo.title }}</h3>
+          <div class="flex items-center gap-4 text-sm text-slate-500">
             <span>{{ t('duration') }}: {{ requestVideo.duration }}</span>
             <span v-if="requestVideo.collectionCount > 1">{{ t('parsed') }}</span>
           </div>
@@ -347,7 +347,7 @@ onMounted(() => {
         <!-- 右侧下载按钮 -->
         <div class="flex-shrink-0">
           <el-dropdown trigger="click" placement="bottom-end">
-            <el-button type="primary" class="bg-blue-600 hover:bg-blue-700 border-blue-600">
+            <el-button type="primary" class="!bg-blue-500 hover:!bg-blue-600 !border-blue-500">
               {{ t('downloadVideo') }}
               <el-icon class="ml-1"><ArrowDown /></el-icon>
             </el-button>
@@ -355,7 +355,7 @@ onMounted(() => {
             <!-- 下拉框内容 -->
             <template #dropdown>
               <div
-                class="bg-slate-800 border border-slate-600 rounded-lg shadow-xl p-4 min-w-[300px]"
+                class="bg-white border border-slate-200 rounded-xl shadow-lg p-4 min-w-[300px]"
               >
                 <!-- 复选框组 -->
                 <el-checkbox-group
@@ -367,19 +367,19 @@ onMounted(() => {
                     :key="item.cid"
                     :label="idx"
                     @change="(checked: boolean) => onCheckChange(idx, checked)"
-                    class="block p-2 hover:bg-slate-700/50 rounded text-white"
+                    class="block p-2 hover:bg-slate-50 rounded text-slate-700"
                   >
-                    <span class="text-blue-400 font-medium">P{{ idx + 1 }}</span>
-                    <span class="ml-2 text-slate-200">{{ item.part }}</span>
+                    <span class="text-blue-500 font-medium">P{{ idx + 1 }}</span>
+                    <span class="ml-2 text-slate-600">{{ item.part }}</span>
                   </el-checkbox>
                 </el-checkbox-group>
 
                 <!-- 操作按钮 -->
-                <div class="mt-4 pt-3 border-t border-slate-600">
+                <div class="mt-4 pt-3 border-t border-slate-200">
                   <el-button
                     type="primary"
                     size="default"
-                    class="w-full bg-green-600 hover:bg-green-700 border-green-600"
+                    class="w-full !bg-blue-500 hover:!bg-blue-600 !border-blue-500"
                     @click.stop="confirmDownload"
                   >
                     {{ t('startDownload') }}
@@ -398,9 +398,9 @@ onMounted(() => {
     <div
       v-for="task in uploadTasks"
       :key="task.id"
-      class="bg-slate-800 bg-opacity-90 p-2 rounded-lg shadow-md"
+      class="bg-white border border-slate-200 p-3 rounded-xl shadow-lg"
     >
-      <div class="text-xs text-white mb-1 truncate">{{ task.name }}</div>
+      <div class="text-xs text-slate-600 mb-1 truncate">{{ task.name }}</div>
       <el-progress
         :percentage="task.progress"
         :status="

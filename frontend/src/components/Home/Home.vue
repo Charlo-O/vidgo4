@@ -850,29 +850,32 @@ onMounted(() => {
     <SearchModal v-model:visible="showSearchModal" @close="showSearchModal = false" />
     <!-- 右侧可Y轴滚动内容区 -->
     <main
-      class="flex-1 h-full p-6 overflow-y-auto bg-gradient-to-br from-gray-900 via-slate-800 to-blue-900"
+      class="flex-1 h-full p-6 overflow-y-auto bg-[#f8f9ff] scrollbar-premium"
     >
       <template v-if="currentMenuIdx === 0">
         <div class="p-6">
-          <h1 class="text-2xl font-bold mb-3 text-white">{{ t('videoManagementSystem') }}</h1>
+          <h1 class="text-3xl font-black tracking-tight mb-1 text-slate-800">
+            <span class="bg-gradient-to-r from-indigo-600 via-violet-600 to-pink-600 bg-clip-text text-transparent">{{ t('videoManagementSystem') }}</span>
+          </h1>
+          <p class="text-slate-500 mb-6">AI 驱动的智能视频字幕处理平台</p>
           <StreamMediaCard @upload-complete="fetchVideoData" />
           <!-- 功能卡片组 - 只保留录音转写并居中 -->
           <div class="flex justify-center mt-8 space-x-8">
             <!-- 录音转写卡片 -->
             <div
-              class="feature-card-hover bg-gradient-to-br from-gray-800/80 via-slate-700/80 to-blue-800/80 backdrop-blur-md rounded-2xl p-8 cursor-pointer border border-white/30 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 max-w-xs text-center"
+              class="card-premium bg-white p-8 cursor-pointer max-w-xs text-center hover:shadow-glow"
             >
               <div
-                class="w-16 h-16 mx-auto rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 bg-opacity-20 flex items-center justify-center mb-4"
+                class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-indigo-500 via-violet-500 to-pink-500 flex items-center justify-center mb-4 shadow-lg shadow-indigo-200"
               >
-                <el-icon size="32" class="text-blue-400">
+                <el-icon size="32" class="text-white">
                   <Microphone />
                 </el-icon>
               </div>
-              <h3 class="text-xl font-semibold text-white mb-1">
+              <h3 class="text-xl font-bold text-slate-800 mb-2">
                 {{ t('liveRecordTranscription') }}
               </h3>
-              <p class="text-white/70 text-sm leading-relaxed">
+              <p class="text-slate-500 text-sm leading-relaxed">
                 {{ t('liveRecordTranscriptionDesc') }}
               </p>
             </div>
@@ -885,7 +888,7 @@ onMounted(() => {
 
       <!-- 📌 媒体库 -->
       <template v-if="currentMenuIdx === 1">
-        <h2 class="text-xl font-bold mb-4 text-white">{{ t('allMedia') }}</h2>
+        <h2 class="text-2xl font-black tracking-tight mb-4 text-slate-800">{{ t('allMedia') }}</h2>
 
         <!-- 批量操作栏（可选） -->
         <BatchToolbar
@@ -900,7 +903,7 @@ onMounted(() => {
 
         <!-- 逐分类渲染 -->
         <section v-for="cat in filteredCategories" :key="cat.id" class="mb-10">
-          <h3 class="text-lg font-semibold mb-3 text-white">
+          <h3 class="text-lg font-bold mb-3 text-slate-700">
             {{ cat.name || t('uncategorized') }}
           </h3>
 
@@ -921,15 +924,13 @@ onMounted(() => {
       <!-- 📌 History 页面 - 只有认证用户才能访问 -->
       <template v-if="currentMenuIdx === 2 && isAuthenticated">
         <div class="flex items-center justify-between mb-4">
-          <h2 class="text-xl font-bold text-white">
+          <h2 class="text-2xl font-black tracking-tight text-slate-800">
             {{ t('recentAccess') }} ({{ recentVideos.length }}{{ t('videosCount') }})
           </h2>
           <el-button
             v-if="!isLoadingHistory"
             @click="fetchRecentVideos"
-            type="primary"
-            size="small"
-            class="!bg-blue-600 !border-blue-600 hover:!bg-blue-700"
+            class="btn-gradient"
           >
             {{ t('refresh') }}
           </el-button>
@@ -937,8 +938,8 @@ onMounted(() => {
 
         <!-- 加载状态 -->
         <div v-if="isLoadingHistory" class="flex items-center justify-center py-12">
-          <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
-          <span class="ml-3 text-white/80">{{ t('loadingRecentVideos') }}</span>
+          <div class="loader-premium"></div>
+          <span class="ml-4 text-slate-500">{{ t('loadingRecentVideos') }}</span>
         </div>
 
         <!-- 错误状态 -->
@@ -989,9 +990,9 @@ onMounted(() => {
 
           <!-- 空状态 -->
           <div v-else class="flex items-center justify-center py-12">
-            <div class="text-center">
-              <p class="text-white/60 text-lg mb-2">{{ t('noRecentVideos') }}</p>
-              <p class="text-white/40 text-sm">{{ t('noRecentVideosDesc') }}</p>
+            <div class="text-center card-premium p-12">
+              <p class="text-slate-600 text-lg mb-2">{{ t('noRecentVideos') }}</p>
+              <p class="text-slate-400 text-sm">{{ t('noRecentVideosDesc') }}</p>
             </div>
           </div>
 
@@ -1012,16 +1013,16 @@ onMounted(() => {
       <!-- 📌 History 页面 - 未认证用户显示提示 -->
       <template v-if="currentMenuIdx === 2 && !isAuthenticated">
         <div class="flex items-center justify-center py-12">
-          <div class="text-center">
-            <p class="text-white/60 text-lg mb-2">{{ t('pleaseLogin') }}</p>
-            <p class="text-white/40 text-sm">{{ t('pleaseLoginDesc') }}</p>
+          <div class="text-center card-premium p-12">
+            <p class="text-slate-600 text-lg mb-2">{{ t('pleaseLogin') }}</p>
+            <p class="text-slate-400 text-sm">{{ t('pleaseLoginDesc') }}</p>
           </div>
         </div>
       </template>
 
       <!-- 📌 单一分类 -->
       <template v-else-if="currentMenuIdx === -1 && currentCategory">
-        <h2 class="text-3xl font-bold mb-4 text-white">{{ currentCategory.name }}</h2>
+        <h2 class="text-2xl font-black tracking-tight mb-4 text-slate-800">{{ currentCategory.name }}</h2>
 
         <BatchToolbar
           :batch-mode="isBatchMode"
@@ -1065,7 +1066,7 @@ onMounted(() => {
           ← {{ t('returnTo') }} {{ currentCategory?.name || t('library') }}
         </el-button>
 
-        <h2 class="text-xl font-bold mb-4 text-white">{{ currentCollection.name }}</h2>
+        <h2 class="text-2xl font-black tracking-tight mb-4 text-slate-800">{{ currentCollection.name }}</h2>
 
         <!-- 批量操作栏（可选） -->
         <BatchToolbar

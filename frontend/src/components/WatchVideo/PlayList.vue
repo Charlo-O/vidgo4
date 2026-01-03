@@ -210,8 +210,8 @@ onMounted(() => {
 </script>
 <template>
   <!-- 合集/播放列表 -->
-  <div class="bg-slate-800/30 rounded-2xl p-6 backdrop-blur-lg border border-slate-600/30">
-    <h2 class="text-xl font-semibold text-white mb-6">
+  <div class="bg-white/50 rounded-2xl p-6 border border-slate-200">
+    <h2 class="text-xl font-semibold text-slate-800 mb-6">
       {{ collection ? collection.name : t('collectionPlaylist') }}
     </h2>
 
@@ -254,15 +254,14 @@ onMounted(() => {
       >
         <div
           @click="switchVideo(video)"
-          class="flex items-center p-4 rounded-xl cursor-pointer hover:bg-slate-700/30 transition-all duration-200 border-l-4"
+          class="flex items-center p-4 rounded-xl cursor-pointer hover:bg-slate-100 transition-all duration-200 border-l-4"
           :class="{
-            'bg-blue-900/30 border-blue-500 shadow-lg': isCurrentVideo(video),
-            'border-slate-600/30 hover:border-slate-500/50': !isCurrentVideo(video),
+            'bg-blue-50 border-blue-500 shadow-sm': isCurrentVideo(video),
+            'border-slate-200 hover:border-slate-300': !isCurrentVideo(video),
           }"
         >
-          <!-- Thumbnail -->
           <div
-            class="w-20 h-12 bg-slate-700/50 rounded-lg mr-4 flex-shrink-0 border border-slate-600/30 overflow-hidden relative"
+            class="w-20 h-12 bg-slate-100 rounded-lg mr-4 flex-shrink-0 border border-slate-200 overflow-hidden relative"
           >
             <img
               v-if="getThumbnailUrl(video)"
@@ -290,10 +289,9 @@ onMounted(() => {
             </div>
           </div>
 
-          <!-- Video Info -->
           <div class="flex-1 min-w-0">
-            <p class="font-medium text-sm text-white truncate mb-1">{{ video.name }}</p>
-            <p class="text-xs text-slate-400">{{ formatDuration(video.length) }}</p>
+            <p class="font-medium text-sm text-slate-800 truncate mb-1">{{ video.name }}</p>
+            <p class="text-xs text-slate-500">{{ formatDuration(video.length) }}</p>
           </div>
 
           <!-- Current Video Indicator -->

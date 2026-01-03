@@ -172,17 +172,17 @@ watch(
 </script>
 
 <template>
-  <div class="bg-slate-800/30 rounded-2xl backdrop-blur-lg border border-slate-600/30">
+  <div class="bg-white/50 rounded-2xl border border-slate-200">
     <!-- Tab Header -->
-    <div class="border-b border-slate-600/30 p-2">
+    <div class="border-b border-slate-200 p-2">
       <nav class="flex space-x-2 px-2">
         <button
           @click="activeTab = 'notes'"
           :class="[
             'flex-1 px-6 py-3 text-sm font-medium rounded-xl transition-all duration-300',
             activeTab === 'notes'
-              ? 'text-white bg-blue-600/80 shadow-lg border border-blue-500/30'
-              : 'text-slate-300 hover:text-white hover:bg-slate-700/50',
+              ? 'text-white bg-blue-500 shadow-lg'
+              : 'text-slate-600 hover:text-blue-600 hover:bg-slate-100',
           ]"
         >
           {{ t('notes') }}
@@ -192,8 +192,8 @@ watch(
           :class="[
             'flex-1 px-6 py-3 text-sm font-medium rounded-xl transition-all duration-300',
             activeTab === 'mindmap'
-              ? 'text-white bg-blue-600/80 shadow-lg border border-blue-500/30'
-              : 'text-slate-300 hover:text-white hover:bg-slate-700/50',
+              ? 'text-white bg-blue-500 shadow-lg'
+              : 'text-slate-600 hover:text-blue-600 hover:bg-slate-100',
           ]"
         >
           {{ t('mindmap') }}

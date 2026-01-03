@@ -383,8 +383,8 @@ watch(
       <div class="flex items-center space-x-4">
         <!-- Character count -->
         <div
-          class="text-sm px-3 py-1 rounded-lg bg-slate-700/50 border border-slate-600/30"
-          :class="isOverLimit ? 'text-red-400 border-red-500/50' : 'text-slate-300'"
+          class="text-sm px-3 py-1 rounded-lg bg-slate-100 border border-slate-200"
+          :class="isOverLimit ? 'text-red-500 border-red-500/50' : 'text-slate-600'"
         >
           {{ characterCount }} / {{ characterLimit }}
         </div>
@@ -396,8 +396,8 @@ watch(
           class="px-4 py-2 text-sm rounded-lg transition-all duration-200 font-medium"
           :class="
             editMode
-              ? 'bg-blue-600/80 hover:bg-blue-600 text-white border border-blue-500/30 disabled:opacity-50'
-              : 'bg-slate-700/50 hover:bg-slate-600/70 text-slate-300 border border-slate-600/30'
+              ? 'bg-blue-500 hover:bg-blue-600 text-white disabled:opacity-50'
+              : 'bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-200'
           "
         >
           <span v-if="isSaving" class="flex items-center">
@@ -444,11 +444,11 @@ watch(
             ref="textareaRef"
             v-model="notesContent"
             @paste="handlePaste"
-            class="w-full h-80 p-4 bg-slate-700/30 border rounded-xl resize-none focus:outline-none focus:ring-2 text-white placeholder-slate-400 backdrop-blur-sm transition-all notes-textarea"
+            class="w-full h-80 p-4 bg-slate-50 border rounded-xl resize-none focus:outline-none focus:ring-2 text-slate-800 placeholder-slate-400 transition-all notes-textarea"
             :class="
               isOverLimit
                 ? 'border-red-500/50 focus:ring-red-500/50'
-                : 'border-slate-600/50 focus:ring-blue-500/50'
+                : 'border-slate-200 focus:ring-blue-500/50'
             "
             :placeholder="t('notePlaceholder')"
           ></textarea>
@@ -456,9 +456,9 @@ watch(
 
         <!-- Help text -->
         <div
-          class="text-xs text-slate-300 bg-slate-700/30 p-3 rounded-lg border border-slate-600/30"
+          class="text-xs text-slate-500 bg-slate-50 p-3 rounded-lg border border-slate-200"
         >
-          <strong class="text-blue-400">快速帮助：</strong>
+          <strong class="text-blue-500">快速帮助：</strong>
           支持完整 Markdown 语法 | 直接粘贴图片自动上传 | 自动保存（2秒后）
         </div>
 
@@ -478,7 +478,7 @@ watch(
           <div
             v-if="renderedNotes.trim()"
             ref="notesContentRef"
-            class="prose prose-sm max-w-none prose-invert prose-headings:text-white prose-p:text-slate-200 prose-strong:text-white prose-code:text-blue-400 prose-code:bg-slate-700/50 prose-pre:bg-slate-700/50 prose-blockquote:border-blue-500/50 prose-a:text-blue-400 notes-content bg-slate-800/30 rounded-xl p-4 backdrop-blur-lg border border-slate-600/30"
+            class="prose prose-sm max-w-none prose-headings:text-slate-800 prose-p:text-slate-600 prose-strong:text-slate-800 prose-code:text-blue-600 prose-code:bg-slate-100 prose-pre:bg-slate-100 prose-blockquote:border-blue-500/50 prose-a:text-blue-500 notes-content bg-slate-50 rounded-xl p-4 border border-slate-200"
             v-html="renderedNotes"
           ></div>
 
@@ -541,13 +541,13 @@ watch(
 
     <!-- Fixed Bottom Toolbar -->
     <div
-      class="fixed bottom-0 left-0 right-0 bg-slate-800/80 backdrop-blur-md border-t border-slate-600/30 p-4"
+      class="fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-md border-t border-slate-200 p-4"
     >
       <div class="flex justify-center">
         <button
           @click="handleFileUpload"
           :disabled="isLoading || isSaving"
-          class="flex items-center space-x-2 px-6 py-2 bg-blue-600/80 hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg transition-all duration-200 font-medium border border-blue-500/30"
+          class="flex items-center space-x-2 px-6 py-2 bg-blue-500 hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg transition-all duration-200 font-medium"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
@@ -566,13 +566,13 @@ watch(
 
 <style scoped>
 .notes-textarea {
-  color: white !important;
+  color: #1e293b !important; /* slate-800 */
 }
 
-/* 确保笔记内容中的所有文本都是白色 */
+/* 确保笔记内容中的所有文本都是深色 */
 .notes-content {
-  color: white !important;
-  background-color: rgba(30, 41, 59, 0.3) !important; /* bg-slate-800/30 */
+  color: #334155 !important; /* slate-700 */
+  background-color: #f8fafc !important; /* slate-50 */
 }
 
 .notes-content * {
@@ -586,24 +586,24 @@ watch(
 .notes-content h4,
 .notes-content h5,
 .notes-content h6 {
-  color: white !important;
+  color: #1e293b !important; /* slate-800 */
 }
 
 .notes-content p {
-  color: rgb(226 232 240) !important; /* slate-200 */
+  color: #475569 !important; /* slate-600 */
 }
 
 .notes-content strong,
 .notes-content b {
-  color: white !important;
+  color: #1e293b !important; /* slate-800 */
 }
 
 .notes-content code {
-  color: rgb(96 165 250) !important; /* blue-400 */
+  color: #2563eb !important; /* blue-600 */
 }
 
 .notes-content a {
-  color: rgb(96 165 250) !important; /* blue-400 */
+  color: #3b82f6 !important; /* blue-500 */
 }
 
 /* Override prose backgrounds to match panel background */
@@ -614,11 +614,11 @@ watch(
 }
 
 .notes-content pre {
-  background-color: rgba(51, 65, 85, 0.5) !important; /* bg-slate-700/50 */
+  background-color: #f1f5f9 !important; /* slate-100 */
 }
 
 .notes-content code {
-  background-color: rgba(51, 65, 85, 0.5) !important; /* bg-slate-700/50 */
+  background-color: #f1f5f9 !important; /* slate-100 */
 }
 
 .notes-content blockquote {
@@ -627,6 +627,6 @@ watch(
 
 /* Ensure the main content area background is visible */
 .notes-content {
-  background-color: rgba(30, 41, 59, 0.3) !important; /* bg-slate-800/30 */
+  background-color: #f8fafc !important; /* slate-50 */
 }
 </style>

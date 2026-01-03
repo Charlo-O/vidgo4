@@ -1,7 +1,7 @@
 <!-- 字幕编辑器，核心功能 -->
 <template>
-  <!-- 深色主题背景容器,min-h-screen:这个元素的最小高度等于整个视口的高度。 -->
-  <div class="min-h-screen bg-[#1B316A]">
+  <!-- 浅色主题背景容器,min-h-screen:这个元素的最小高度等于整个视口的高度。 -->
+  <div class="min-h-screen bg-[#f8f9ff]">
     <!-- 头部导航栏 -->
     <NavBar
       :showTranslation="showTranslation"
@@ -19,7 +19,7 @@
       <div class="flex-[2] flex flex-col min-h-0 gap-6 min-w-0">
         <!-- 视频播放器 -->
         <div
-          class="flex-[2] flex flex-col min-h-0 bg-gradient-to-r from-slate-800/90 to-slate-700/90 backdrop-blur-lg rounded-2xl p-4 border border-slate-600/50 shadow-2xl min-w-0"
+          class="flex-[2] flex flex-col min-h-0 bg-white rounded-3xl p-4 border border-slate-200 shadow-sm min-w-0"
         >
           <!-- 使用填充容器替代 aspect-video，以便可伸缩 -->
           <div class="relative w-full h-full overflow-hidden">
@@ -37,7 +37,7 @@
         <!-- 波形查看器 -->
         <div
           ref="waveformContainerRef"
-          class="flex-[1] p-4 border border-slate-600/50 bg-gradient-to-r from-slate-800/90 to-slate-700/90 backdrop-blur-lg rounded-2xl shadow-2xl min-w-0"
+          class="flex-[1] p-4 border border-slate-200 bg-white rounded-3xl shadow-sm min-w-0"
         >
           <WaveformViewer
             v-if="waveformReady"
@@ -59,7 +59,7 @@
       <!-- 右侧字幕编辑器 - 占满右侧 -->
       <div class="flex-[1] h-full min-h-0">
         <div
-          class="bg-gradient-to-r from-slate-800/90 to-slate-700/90 backdrop-blur-lg rounded-2xl border border-slate-600/50 shadow-2xl h-full min-h-0 min-w-0"
+          class="bg-white rounded-3xl border border-slate-200 shadow-sm h-full min-h-0 min-w-0"
         >
           <SubtitleEditor
             ref="subtitleEditorRef"

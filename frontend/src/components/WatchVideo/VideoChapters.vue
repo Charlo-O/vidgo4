@@ -166,18 +166,18 @@ watch(
   <div class="p-6">
     <!-- Header with action buttons -->
     <div class="flex justify-between items-center mb-6">
-      <h3 class="text-xl font-semibold text-white">{{ t('videoChaptersTitle') }}</h3>
+      <h3 class="text-xl font-semibold text-slate-800">{{ t('videoChaptersTitle') }}</h3>
       <div v-if="props.id && props.id > 0" class="flex space-x-3">
         <button
           @click="openEditDialog"
-          class="px-4 py-2 bg-blue-600/80 hover:bg-blue-600 text-white text-sm rounded-lg transition-colors backdrop-blur-sm border border-blue-500/30"
+          class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded-lg transition-colors"
         >
           编辑章节
         </button>
         <button
           @click="fetchThumbnails"
           :disabled="isFetchingImages || chapters.length === 0"
-          class="px-4 py-2 bg-green-600/80 hover:bg-green-600 text-white text-sm rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed backdrop-blur-sm border border-green-500/30"
+          class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white text-sm rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <span v-if="isFetchingImages" class="flex items-center">
             <svg
@@ -214,15 +214,15 @@ watch(
         v-for="(chapter, index) in chapters"
         :key="chapter.id"
         @click="jumpToChapter(chapter)"
-        class="flex items-center p-4 rounded-xl border cursor-pointer hover:bg-slate-700/30 transition-all duration-200"
+        class="flex items-center p-4 rounded-xl border cursor-pointer hover:bg-slate-100 transition-all duration-200"
         :class="
           getCurrentChapter?.id === chapter.id 
-            ? 'border-blue-500/50 bg-blue-900/30 shadow-lg' 
-            : 'border-slate-600/30 hover:border-slate-500/50'
+            ? 'border-blue-500 bg-blue-50 shadow-sm' 
+            : 'border-slate-200 hover:border-slate-300'
         "
       >
         <!-- Larger Thumbnail -->
-        <div class="flex-shrink-0 w-32 h-20 bg-slate-700/50 rounded-lg overflow-hidden mr-4 border border-slate-600/30">
+        <div class="flex-shrink-0 w-32 h-20 bg-slate-100 rounded-lg overflow-hidden mr-4 border border-slate-200">
           <img
             v-if="chapter.thumbnail"
             :src="chapter.thumbnail"
@@ -232,7 +232,7 @@ watch(
             @error="() => console.error('Failed to load image:', chapter.thumbnail)"
           />
           <div v-else class="w-full h-full flex items-center justify-center text-slate-400 text-sm">
-            <svg class="w-8 h-8 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
           </div>
@@ -240,8 +240,8 @@ watch(
 
         <!-- Chapter Info -->
         <div class="flex-1 min-w-0">
-          <h4 class="font-medium text-white truncate mb-1 text-lg">{{ chapter.title }}</h4>
-          <p class="text-sm text-slate-400">{{ formatTime(chapter.startTime) }}</p>
+          <h4 class="font-medium text-slate-800 truncate mb-1 text-lg">{{ chapter.title }}</h4>
+          <p class="text-sm text-slate-500">{{ formatTime(chapter.startTime) }}</p>
         </div>
 
         <!-- Current indicator -->
@@ -264,10 +264,10 @@ watch(
       class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50"
       @click.self="showEditDialog = false"
     >
-      <div class="bg-gradient-to-br from-slate-800/95 to-slate-700/95 rounded-2xl p-8 w-full max-w-2xl max-h-[80vh] overflow-y-auto border border-slate-600/50 shadow-2xl backdrop-blur-lg">
+      <div class="bg-white rounded-2xl p-8 w-full max-w-2xl max-h-[80vh] overflow-y-auto border border-slate-200 shadow-xl">
         <div class="flex justify-between items-center mb-6">
-          <h3 class="text-2xl font-semibold text-white">编辑章节</h3>
-          <button @click="showEditDialog = false" class="text-slate-400 hover:text-white p-2 rounded-lg hover:bg-slate-700/50 transition-all">
+          <h3 class="text-2xl font-semibold text-slate-800">编辑章节</h3>
+          <button @click="showEditDialog = false" class="text-slate-400 hover:text-slate-600 p-2 rounded-lg hover:bg-slate-100 transition-all">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 stroke-linecap="round"
@@ -283,13 +283,13 @@ watch(
           <div
             v-for="(chapter, index) in chapters"
             :key="chapter.id"
-            class="flex items-center space-x-3 p-4 bg-slate-700/30 border border-slate-600/30 rounded-xl hover:bg-slate-600/30 transition-all"
+            class="flex items-center space-x-3 p-4 bg-slate-50 border border-slate-200 rounded-xl hover:bg-slate-100 transition-all"
           >
-            <span class="text-sm text-slate-400 w-8 font-mono">{{ index + 1 }}.</span>
+            <span class="text-sm text-slate-500 w-8 font-mono">{{ index + 1 }}.</span>
             <input
               v-model="chapter.title"
               type="text"
-              class="flex-1 px-4 py-2 bg-slate-600/50 border border-slate-500/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-white placeholder-slate-400 transition-all"
+              class="flex-1 px-4 py-2 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-slate-800 placeholder-slate-400 transition-all"
               placeholder="章节标题"
             />
             <input
@@ -297,12 +297,12 @@ watch(
               type="number"
               min="0"
               step="1"
-              class="w-24 px-3 py-2 bg-slate-600/50 border border-slate-500/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-white placeholder-slate-400 transition-all"
+              class="w-24 px-3 py-2 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-slate-800 placeholder-slate-400 transition-all"
               placeholder="时间(秒)"
             />
             <button
               @click="removeChapter(chapter.id)"
-              class="text-red-400 hover:text-red-300 p-2 rounded-lg hover:bg-red-500/20 transition-all"
+              class="text-red-500 hover:text-red-600 p-2 rounded-lg hover:bg-red-50 transition-all"
               title="删除章节"
             >
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -318,7 +318,7 @@ watch(
 
           <button
             @click="addChapter"
-            class="w-full py-4 border-2 border-dashed border-slate-600/50 rounded-xl text-slate-400 hover:border-slate-500/70 hover:text-slate-300 hover:bg-slate-700/20 transition-all"
+            class="w-full py-4 border-2 border-dashed border-slate-300 rounded-xl text-slate-500 hover:border-slate-400 hover:text-slate-600 hover:bg-slate-50 transition-all"
           >
             <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -327,16 +327,16 @@ watch(
           </button>
         </div>
 
-        <div class="flex justify-end space-x-4 mt-8 pt-6 border-t border-slate-600/30">
+        <div class="flex justify-end space-x-4 mt-8 pt-6 border-t border-slate-200">
           <button
             @click="showEditDialog = false"
-            class="px-6 py-2 text-slate-300 hover:text-white bg-slate-700/50 hover:bg-slate-600/70 rounded-lg transition-all border border-slate-600/30"
+            class="px-6 py-2 text-slate-600 hover:text-slate-800 bg-slate-100 hover:bg-slate-200 rounded-lg transition-all"
           >
             取消
           </button>
           <button
             @click="saveChapters"
-            class="px-6 py-2 bg-blue-600/80 hover:bg-blue-600 text-white rounded-lg transition-all border border-blue-500/30 shadow-lg"
+            class="px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-all shadow-sm"
           >
             保存
           </button>

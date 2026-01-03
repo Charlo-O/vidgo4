@@ -2,11 +2,196 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 滚动条隐藏工具类 */
-.scrollbar-hidden {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none !important;
+/* ============================================
+   Premium SaaS Modernism - Global Styles
+   ============================================ */
+
+@layer base {
+  /* 全局字体和背景 */
+  :root {
+    --gradient-primary: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+    --gradient-dark: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    --glass-bg: rgba(255, 255, 255, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.18);
+  }
+
+  body {
+    @apply antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: #f8f9ff;
+  }
+
+  /* 高对比度排版 */
+  h1, h2, h3 {
+    @apply font-black tracking-tighter;
+  }
+}
+
+@layer components {
+  /* ========== 渐变文字 ========== */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+
+  /* ========== 玻璃态效果 ========== */
+  .glass {
+    @apply backdrop-blur-xl bg-white/80 border border-white/20;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  }
+
+  .glass-dark {
+    @apply backdrop-blur-xl bg-slate-900/90 border border-white/10;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  }
+
+  /* ========== 超圆角卡片 ========== */
+  .card-premium {
+    @apply rounded-3xl bg-white border border-slate-200/50 shadow-glass;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-premium:hover {
+    @apply shadow-glass-lg border-slate-200;
+    transform: translateY(-2px);
+  }
+
+  /* ========== 渐变按钮 ========== */
+  .btn-gradient {
+    @apply px-6 py-3 rounded-2xl font-semibold text-white;
+    background: var(--gradient-primary);
+    background-size: 200% 200%;
+    transition: all 0.3s ease;
+  }
+
+  .btn-gradient:hover {
+    @apply shadow-glow;
+    transform: scale(1.02);
+    background-position: right center;
+  }
+
+  /* ========== 玻璃态按钮 ========== */
+  .btn-glass {
+    @apply px-5 py-2.5 rounded-xl font-medium backdrop-blur-md;
+    @apply bg-white/70 border border-slate-200/50 text-slate-700;
+    @apply hover:bg-white hover:border-slate-300 hover:shadow-lg;
+    transition: all 0.2s ease;
+  }
+
+  /* ========== 输入框样式 ========== */
+  .input-premium {
+    @apply w-full px-4 py-3 rounded-2xl;
+    @apply bg-slate-50/80 border border-slate-200/50;
+    @apply focus:bg-white focus:border-indigo-300 focus:ring-4 focus:ring-indigo-100;
+    @apply placeholder:text-slate-400;
+    transition: all 0.2s ease;
+  }
+
+  /* ========== 深色实验室卡片 ========== */
+  .card-lab {
+    @apply rounded-3xl;
+    background: var(--gradient-dark);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  /* ========== 光晕效果 ========== */
+  .glow-orb {
+    @apply absolute rounded-full blur-3xl opacity-30;
+    background: var(--gradient-primary);
+  }
+
+  /* ========== 侧边栏样式 ========== */
+  .sidebar-premium {
+    background: linear-gradient(180deg, #f8f9ff 0%, #f1f5f9 100%);
+    @apply border-r border-slate-200/50;
+  }
+
+  /* ========== 菜单项 ========== */
+  .menu-item-premium {
+    @apply flex items-center px-4 py-3 rounded-2xl;
+    @apply text-slate-600 font-medium;
+    @apply hover:bg-indigo-50 hover:text-indigo-600;
+    @apply transition-all duration-200;
+  }
+
+  .menu-item-premium.active {
+    @apply bg-indigo-100 text-indigo-700;
+    @apply shadow-sm;
+  }
+
+  /* ========== 标签样式 ========== */
+  .tag-premium {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold;
+    @apply bg-indigo-100 text-indigo-700;
+  }
+
+  .tag-gradient {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold text-white;
+    background: var(--gradient-primary);
+  }
+
+  /* ========== 视频卡片 ========== */
+  .video-card-premium {
+    @apply rounded-3xl overflow-hidden bg-white;
+    @apply border border-slate-100 shadow-glass;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .video-card-premium:hover {
+    @apply shadow-glass-lg border-slate-200;
+    transform: translateY(-4px) scale(1.01);
+  }
+
+  /* ========== 加载动画 ========== */
+  .loader-premium {
+    @apply w-16 h-16 relative;
+  }
+
+  .loader-premium::before {
+    content: '';
+    @apply absolute inset-0 rounded-full;
+    border: 3px solid transparent;
+    border-top-color: #6366f1;
+    border-right-color: #a855f7;
+    animation: spin 1s linear infinite;
+  }
+
+  .loader-premium::after {
+    content: '';
+    @apply absolute inset-2 rounded-full bg-indigo-100;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+}
+
+@layer utilities {
+  /* 滚动条隐藏 */
+  .scrollbar-hidden {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none !important;
+    }
+  }
+
+  /* 优雅滚动条 */
+  .scrollbar-premium {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+  }
+
+  .scrollbar-premium::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-premium::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 rounded-full;
+  }
+
+  .scrollbar-premium::-webkit-scrollbar-track {
+    @apply bg-transparent;
   }
 }

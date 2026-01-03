@@ -109,9 +109,9 @@ onMounted(() => {
 })
 </script>
 <template>
-  <!-- 深色主题顶部导航栏 -->
+  <!-- 浅色主题顶部导航栏 -->
   <div
-    class="nav-bar bg-gradient-to-r from-slate-800/95 to-slate-700/95 backdrop-blur-lg border-b border-slate-600/50 px-6 py-4 relative shadow-lg"
+    class="nav-bar bg-white/90 backdrop-blur-lg border-b border-slate-200 px-6 py-4 relative shadow-sm"
     @mouseenter="mouseEnter"
   >
     <div class="flex justify-between items-center">
@@ -119,9 +119,9 @@ onMounted(() => {
       <div class="flex items-center space-x-6 basis-2/3 min-w-0">
         <button
           @click="goHome"
-          class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-slate-700/70 transition-colors flex-shrink-0 border border-slate-600/30"
+          class="flex items-center justify-center w-10 h-10 rounded-xl hover:bg-slate-100 transition-colors flex-shrink-0 border border-slate-200"
         >
-          <svg class="w-5 h-5 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -136,7 +136,7 @@ onMounted(() => {
           <el-tooltip :content="title" placement="bottom" :disabled="!isTextTruncated">
             <h1
               ref="titleRef"
-              class="text-xl font-semibold text-white truncate"
+              class="text-xl font-semibold text-slate-800 truncate"
               @mouseenter="checkTruncation"
             >
               {{ title }}
@@ -150,22 +150,22 @@ onMounted(() => {
         <!-- 用户名 -->
         <div class="flex items-center space-x-3">
           <div
-            class="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center"
+            class="w-8 h-8 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center"
           >
             <span class="text-white font-semibold text-sm">{{ userInitial }}</span>
           </div>
-          <span class="text-slate-300 font-medium">{{ username }}</span>
+          <span class="text-slate-600 font-medium">{{ username }}</span>
         </div>
 
         <!-- 视图切换按钮 -->
         <el-tooltip :content="isInEditor ? 'Video Watch' : 'Edit'" placement="bottom">
           <button
             @click="toggleView"
-            class="flex items-center justify-center px-4 py-2 rounded-lg bg-slate-700/50 hover:bg-slate-600/70 transition-colors border border-slate-600/30"
+            class="flex items-center justify-center px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 transition-colors border border-slate-200"
           >
-            <Video v-if="isInEditor" class="w-4 h-4 text-slate-300 mr-2" />
-            <FilePen v-else class="w-4 h-4 text-slate-300 mr-2" />
-            <span class="text-slate-300 text-sm font-medium">
+            <Video v-if="isInEditor" class="w-4 h-4 text-slate-600 mr-2" />
+            <FilePen v-else class="w-4 h-4 text-slate-600 mr-2" />
+            <span class="text-slate-600 text-sm font-medium">
               {{ isInEditor ? 'Video Watch' : 'Edit' }}
             </span>
           </button>
@@ -175,9 +175,9 @@ onMounted(() => {
         <el-tooltip content="设置" placement="bottom">
           <button
             @click="emit('open-settings')"
-            class="flex items-center justify-center w-10 h-10 rounded-full bg-slate-700/50 hover:bg-slate-600/70 transition-colors border border-slate-600/30"
+            class="flex items-center justify-center w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 transition-colors border border-slate-200"
           >
-            <Settings class="w-5 h-5 text-slate-300" />
+            <Settings class="w-5 h-5 text-slate-600" />
           </button>
         </el-tooltip>
       </div>
@@ -185,7 +185,7 @@ onMounted(() => {
 
     <!-- progress bar (shows only on hover) -->
     <transition name="fade">
-      <div v-show="showProgress" class="absolute bottom-0 left-0 w-full h-1 bg-slate-700/50">
+      <div v-show="showProgress" class="absolute bottom-0 left-0 w-full h-1 bg-slate-200">
         <div class="h-full bg-blue-500 transition-[width] duration-300" :style="progressStyle" />
       </div>
     </transition>

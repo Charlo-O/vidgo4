@@ -499,11 +499,11 @@ onBeforeUnmount(() => {
   <!-- 字幕转译任务 -->
   <div class="mb-8">
     <div
-      class="bg-gradient-to-r from-slate-800/90 to-slate-700/90 backdrop-blur-lg rounded-2xl p-6 border border-slate-600/50 shadow-2xl"
+      class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm"
     >
       <!-- 标题栏 -->
       <div class="flex items-center justify-between mb-6">
-        <h2 class="text-xl font-bold text-white">{{ t('subtitleTranslation') }}</h2>
+        <h2 class="text-xl font-bold text-slate-800">{{ t('subtitleTranslation') }}</h2>
         <el-button
           type="primary"
           size="small"
@@ -517,11 +517,11 @@ onBeforeUnmount(() => {
       <!-- 深色主题表格 -->
       <el-table
         :data="subtitleTasks"
-        class="dark-table"
-        :header-cell-style="{ background: '#1e293b', color: '#e2e8f0', borderColor: '#475569' }"
-        :cell-style="{ background: '#334155', color: '#e2e8f0', borderColor: '#475569' }"
-        :row-style="{ background: '#334155' }"
-        style="width: 100%; background: #334155"
+        class="light-table"
+        :header-cell-style="{ background: '#f8fafc', color: '#334155', borderColor: '#e2e8f0' }"
+        :cell-style="{ background: '#ffffff', color: '#334155', borderColor: '#e2e8f0' }"
+        :row-style="{ background: '#ffffff' }"
+        style="width: 100%; background: #ffffff"
       >
         <!-- 文件名 -->
         <el-table-column prop="fileName" :label="t('filename')" width="400" />
@@ -614,11 +614,11 @@ onBeforeUnmount(() => {
   <!-- 视频下载任务 -->
   <div class="mb-8">
     <div
-      class="bg-gradient-to-r from-slate-800/90 to-slate-700/90 backdrop-blur-lg rounded-2xl p-6 border border-slate-600/50 shadow-2xl"
+      class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm"
     >
       <!-- 标题栏 -->
       <div class="flex items-center justify-between mb-6">
-        <h2 class="text-xl font-bold text-white">{{ t('videoDownload') }}</h2>
+        <h2 class="text-xl font-bold text-slate-800">{{ t('videoDownload') }}</h2>
         <el-button
           type="primary"
           size="small"
@@ -632,11 +632,11 @@ onBeforeUnmount(() => {
       <!-- 深色主题表格 -->
       <el-table
         :data="downloadTasks"
-        class="dark-table"
-        :header-cell-style="{ background: '#1e293b', color: '#e2e8f0', borderColor: '#475569' }"
-        :cell-style="{ background: '#334155', color: '#e2e8f0', borderColor: '#475569' }"
-        :row-style="{ background: '#334155' }"
-        style="width: 100%; background: #334155"
+        class="light-table"
+        :header-cell-style="{ background: '#f8fafc', color: '#334155', borderColor: '#e2e8f0' }"
+        :cell-style="{ background: '#ffffff', color: '#334155', borderColor: '#e2e8f0' }"
+        :row-style="{ background: '#ffffff' }"
+        style="width: 100%; background: #ffffff"
       >
         <!-- 文件名 -->
         <el-table-column prop="fileName" :label="t('filename')" width="400" />
@@ -729,11 +729,11 @@ onBeforeUnmount(() => {
   <!-- 视频导出任务 -->
   <div class="mb-8">
     <div
-      class="bg-gradient-to-r from-slate-800/90 to-slate-700/90 backdrop-blur-lg rounded-2xl p-6 border border-slate-600/50 shadow-2xl"
+      class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm"
     >
       <!-- 标题栏 -->
       <div class="flex items-center justify-between mb-6">
-        <h2 class="text-xl font-bold text-white">{{ t('videoExport') }}</h2>
+        <h2 class="text-xl font-bold text-slate-800">{{ t('videoExport') }}</h2>
         <el-button
           type="primary"
           size="small"
@@ -747,11 +747,11 @@ onBeforeUnmount(() => {
       <!-- 深色主题表格 -->
       <el-table
         :data="exportTasks"
-        class="dark-table"
-        :header-cell-style="{ background: '#1e293b', color: '#e2e8f0', borderColor: '#475569' }"
-        :cell-style="{ background: '#334155', color: '#e2e8f0', borderColor: '#475569' }"
-        :row-style="{ background: '#334155' }"
-        style="width: 100%; background: #334155"
+        class="light-table"
+        :header-cell-style="{ background: '#f8fafc', color: '#334155', borderColor: '#e2e8f0' }"
+        :cell-style="{ background: '#ffffff', color: '#334155', borderColor: '#e2e8f0' }"
+        :row-style="{ background: '#ffffff' }"
+        style="width: 100%; background: #ffffff"
       >
         <!-- 视频名称 -->
         <el-table-column prop="videoName" :label="t('videoName')" width="400" />
@@ -850,11 +850,11 @@ onBeforeUnmount(() => {
   <!-- TTS配音生成任务 -->
   <div class="mb-8">
     <div
-      class="bg-gradient-to-r from-slate-800/90 to-slate-700/90 backdrop-blur-lg rounded-2xl p-6 border border-slate-600/50 shadow-2xl"
+      class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm"
     >
       <!-- 标题栏 -->
       <div class="flex items-center justify-between mb-6">
-        <h2 class="text-xl font-bold text-white">TTS配音生成</h2>
+        <h2 class="text-xl font-bold text-slate-800">TTS配音生成</h2>
         <el-button
           type="primary"
           size="small"
@@ -868,11 +868,11 @@ onBeforeUnmount(() => {
       <!-- 深色主题表格 -->
       <el-table
         :data="ttsTasks"
-        class="dark-table"
-        :header-cell-style="{ background: '#1e293b', color: '#e2e8f0', borderColor: '#475569' }"
-        :cell-style="{ background: '#334155', color: '#e2e8f0', borderColor: '#475569' }"
-        :row-style="{ background: '#334155' }"
-        style="width: 100%; background: #334155"
+        class="light-table"
+        :header-cell-style="{ background: '#f8fafc', color: '#334155', borderColor: '#e2e8f0' }"
+        :cell-style="{ background: '#ffffff', color: '#334155', borderColor: '#e2e8f0' }"
+        :row-style="{ background: '#ffffff' }"
+        style="width: 100%; background: #ffffff"
       >
         <!-- 视频名称 -->
         <el-table-column prop="videoName" label="视频名称" width="400" />
@@ -973,25 +973,25 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
-/* 深色主题表格样式 */
-.dark-table {
-  background: #334155 !important;
+/* 浅色主题表格样式 */
+.light-table {
+  background: #ffffff !important;
 }
 
-.dark-table :deep(.el-table__header-wrapper) {
-  background: #1e293b !important;
+.light-table :deep(.el-table__header-wrapper) {
+  background: #f8fafc !important;
 }
 
-.dark-table :deep(.el-table__body-wrapper) {
-  background: #334155 !important;
+.light-table :deep(.el-table__body-wrapper) {
+  background: #ffffff !important;
 }
 
-.dark-table :deep(.el-table__row) {
-  background: #334155 !important;
+.light-table :deep(.el-table__row) {
+  background: #ffffff !important;
 }
 
-.dark-table :deep(.el-table__row:hover > td) {
-  background: #475569 !important;
+.light-table :deep(.el-table__row:hover > td) {
+  background: #f1f5f9 !important;
 }
 
 /* 状态指示点样式 */

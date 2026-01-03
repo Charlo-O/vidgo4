@@ -10,7 +10,7 @@
             <!-- Subtitle List Dropdown -->
             <el-dropdown @command="handleSubtitleFilter" trigger="click">
               <button
-                class="flex items-center space-x-2 px-3 py-2 bg-slate-700/50 hover:bg-slate-600/70 text-white rounded-lg transition-colors border border-slate-600/30"
+                class="flex items-center space-x-2 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg transition-colors border border-slate-200"
               >
                 <span class="text-xl font-semibold">{{ selectedFilterLabel }}</span>
                 <el-icon class="ml-2">
@@ -19,7 +19,7 @@
               </button>
               <template #dropdown>
                 <el-dropdown-menu
-                  class="rounded-lg shadow-lg border border-slate-600/50 bg-slate-800"
+                  class="rounded-lg shadow-lg border border-slate-200 bg-white"
                 >
                   <el-dropdown-item
                     command="all"
@@ -81,13 +81,13 @@
               <!-- 导出按钮 -->
               <el-dropdown @command="handleExport" trigger="click">
                 <button
-                  class="px-4 py-2 bg-slate-700/50 hover:bg-slate-600/70 text-slate-300 text-sm rounded-lg transition-colors border border-slate-600/30"
+                  class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 text-sm rounded-lg transition-colors border border-slate-200"
                 >
                   <el-icon><Upload /></el-icon> {{ t('export') }}
                 </button>
                 <template #dropdown>
                   <el-dropdown-menu
-                    class="rounded-lg shadow-lg border border-slate-600/50 bg-slate-800"
+                    class="rounded-lg shadow-lg border border-slate-200 bg-white"
                   >
                     <div
                       class="text-xs text-white px-4 py-2 bg-slate-700/50 uppercase tracking-wide font-semibold"
@@ -168,12 +168,12 @@
                 }
               "
               :class="[
-                'p-4 rounded-xl border-2 transition-all duration-200 cursor-pointer backdrop-blur-sm',
+                'p-4 rounded-xl border-2 transition-all duration-200 cursor-pointer',
                 activeSubtitleIndex === s.originalIndex
-                  ? 'border-blue-500 bg-blue-900/30 shadow-lg'
+                  ? 'border-blue-500 bg-blue-50 shadow-sm'
                   : currentSubtitleIndex === s.originalIndex
-                    ? 'border-green-500 bg-green-900/30 shadow-md'
-                    : 'border-slate-600/30 bg-slate-700/20 hover:border-slate-500/50 hover:bg-slate-700/30',
+                    ? 'border-green-500 bg-green-50 shadow-sm'
+                    : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50',
               ]"
               @click="setActiveSubtitle(s.originalIndex)"
             >
@@ -290,36 +290,36 @@
       class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
       @click.self="showLanguageDialog = false"
     >
-      <div class="bg-slate-800 rounded-lg shadow-xl w-96 border border-slate-600">
+      <div class="bg-white rounded-lg shadow-xl w-96 border border-slate-200">
         <div class="p-6">
-          <h3 class="text-lg font-semibold text-white mb-4">选择导出语言</h3>
+          <h3 class="text-lg font-semibold text-slate-800 mb-4">选择导出语言</h3>
           <div class="space-y-3">
             <button
               @click="exportWithLanguage('raw')"
-              class="w-full p-3 text-left bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors border border-slate-600"
+              class="w-full p-3 text-left bg-slate-50 hover:bg-slate-100 text-slate-800 rounded-lg transition-colors border border-slate-200"
             >
               <div class="font-medium">原文字幕</div>
-              <div class="text-sm text-slate-300">仅导出视频原始语言字幕</div>
+              <div class="text-sm text-slate-500">仅导出视频原始语言字幕</div>
             </button>
             <button
               @click="exportWithLanguage('translated')"
-              class="w-full p-3 text-left bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors border border-slate-600"
+              class="w-full p-3 text-left bg-slate-50 hover:bg-slate-100 text-slate-800 rounded-lg transition-colors border border-slate-200"
             >
               <div class="font-medium">译文字幕</div>
-              <div class="text-sm text-slate-300">仅导出翻译后的字幕</div>
+              <div class="text-sm text-slate-500">仅导出翻译后的字幕</div>
             </button>
             <button
               @click="exportWithLanguage('both')"
-              class="w-full p-3 text-left bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors border border-slate-600"
+              class="w-full p-3 text-left bg-slate-50 hover:bg-slate-100 text-slate-800 rounded-lg transition-colors border border-slate-200"
             >
               <div class="font-medium">双语字幕</div>
-              <div class="text-sm text-slate-300">导出原文+译文（原文在上，译文在下）</div>
+              <div class="text-sm text-slate-500">导出原文+译文（原文在上，译文在下）</div>
             </button>
           </div>
           <div class="mt-4 text-right">
             <button
               @click="showLanguageDialog = false"
-              class="px-4 py-2 text-slate-300 hover:text-white transition-colors"
+              class="px-4 py-2 text-slate-500 hover:text-slate-700 transition-colors"
             >
               取消
             </button>

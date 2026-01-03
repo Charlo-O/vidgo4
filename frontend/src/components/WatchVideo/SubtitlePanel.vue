@@ -427,13 +427,13 @@ function handleSubtitleDialogSubmitted() {
   <div class="p-6">
     <!-- Control Bar -->
     <div
-      class="flex items-center justify-between mb-6 p-4 bg-slate-700/30 rounded-xl border border-slate-600/30"
+      class="flex items-center justify-between mb-6 p-4 bg-slate-100 rounded-xl border border-slate-200"
     >
       <!-- Left Side Controls -->
       <div class="flex items-center space-x-4">
         <!-- Auto Scroll Checkbox -->
         <el-checkbox v-model="autoScroll" class="blue-checkbox">
-          <span class="text-slate-300">自动滚动</span>
+          <span class="text-slate-600">自动滚动</span>
         </el-checkbox>
       </div>
 
@@ -452,7 +452,7 @@ function handleSubtitleDialogSubmitted() {
 
         <!-- More Options Dropdown -->
         <el-dropdown trigger="click">
-          <el-button size="small" class="!bg-slate-600 !border-slate-600 hover:!bg-slate-700">
+          <el-button size="small" class="!bg-slate-200 !border-slate-300 hover:!bg-slate-300 !text-slate-600">
             <MoreHorizontal class="w-4 h-4" />
           </el-button>
           <template #dropdown>
@@ -547,11 +547,11 @@ function handleSubtitleDialogSubmitted() {
               ),
             )
           "
-          class="p-4 rounded-xl cursor-pointer hover:bg-slate-700/30 transition-all duration-200 border-l-4 backdrop-blur-sm"
+          class="p-4 rounded-xl cursor-pointer hover:bg-slate-100 transition-all duration-200 border-l-4"
           :class="
             isActive(s)
-              ? 'border-blue-500 bg-blue-900/30 shadow-lg'
-              : 'border-slate-600/30 hover:border-slate-500/50'
+              ? 'border-blue-500 bg-blue-50 shadow-sm'
+              : 'border-slate-200 hover:border-slate-300'
           "
         >
           <div
@@ -589,10 +589,10 @@ function handleSubtitleDialogSubmitted() {
           </div>
           <div v-else class="flex items-start gap-3">
             <span
-              class="text-xs font-mono text-blue-400 bg-slate-700/50 px-2 py-1 rounded-md whitespace-nowrap"
+              class="text-xs font-mono text-blue-500 bg-blue-50 px-2 py-1 rounded-md whitespace-nowrap"
               >{{ formatTime(s.start) }}</span
             >
-            <p class="text-slate-200 leading-relaxed flex-1">{{ s.text }}</p>
+            <p class="text-slate-700 leading-relaxed flex-1">{{ s.text }}</p>
           </div>
         </div>
       </template>
