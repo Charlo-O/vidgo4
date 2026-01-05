@@ -1,11 +1,14 @@
 <!-- 视频信息组件 -->
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue'
+import { useRouter } from 'vue-router'
 import { markdownToHtml } from '@/composables/ConvertMarkdown'
 import { getCSRFToken } from '@/composables/GetCSRFToken'
 import NotesPanel from './NotesPanel.vue'
 import MindmapEditor from './MindmapEditor.vue'
 import { useI18n } from 'vue-i18n'
+
+const router = useRouter()
 
 // i18n functionality
 const { t } = useI18n()
@@ -38,7 +41,7 @@ const loadMindmapContent = async () => {
 
   try {
     console.log('Loading mindmap for video ID:', props.id)
-    const res = await fetch(`${BACKEND}/video/mindmap/get/${props.id}`)
+    const res = await fetch(`${BACKEND}/api/mindmap/get/${props.id}`)
 
     if (res.ok) {
       const data = await res.json()
@@ -75,7 +78,7 @@ const handleMindmapSave = async (content: any) => {
 
   try {
     const csrf = await getCSRFToken()
-    const res = await fetch(`${BACKEND}/video/mindmap/update/${props.id}`, {
+    const res = await fetch(`${BACKEND}/api/mindmap/update/${props.id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -197,6 +200,14 @@ watch(
           ]"
         >
           {{ t('mindmap') }}
+        </button>
+        <!-- AI笔记编辑器入口 -->
+        <button
+          @click="router.push(`/notes/${props.filename}`)"
+          class="px-4 py-3 text-sm font-medium text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl flex items-center space-x-1"
+        >
+          <span>🤖</span>
+          <span>AI笔记</span>
         </button>
       </nav>
     </div>

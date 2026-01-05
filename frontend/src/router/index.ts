@@ -45,6 +45,17 @@ const router = createRouter({
       },
     },
 
+    // 笔记编辑器路由：/notes/foo.mp4
+    {
+      path: '/notes/:basename([^/]+)\\.:ext(mp4|webm|mkv|m4a|mp3|wav|aac)',
+      name: 'note-editor',
+      component: () => import('@/views/NoteEditorView.vue'),
+      props: (route) => {
+        const { basename, ext } = route.params as { basename: string; ext: string }
+        return { basename, ext }
+      },
+    },
+
     // 波形测试页面（开发调试用）
     {
       path: '/waveform-test',

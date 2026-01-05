@@ -17,17 +17,16 @@ def _ensure_ini():
     """Create a default settings.ini if it doesn't exist."""
     if not os.path.exists(SETTINGS_FILE):
         cfg = configparser.ConfigParser(interpolation=None)
-        cfg['DEFAULT'] = {
             'selected_model_provider': 'deepseek',
             'enable_thinking': 'true',
             'use_proxy': 'false',
-            'deepseek_api_key': 'sk-17047f89de904759a241f4086bd5a9bf',
+            'deepseek_api_key': '',
             'deepseek_base_url': 'https://api.deepseek.com',
-            'glm_api_key': 'sk-17047f89de904759a241f4086bd5a9bf',
-            'glm_base_url': 'https://api.deepseek.com',
-            'openai_api_key': 'sk-qTbd1AR4oMuP71ziRngmk3i0djrWVfLtuisvYKCH5B9jLz9g',
-            'openai_base_url': 'https://api.chatanywhere.tech/v1',
-            'qwen_api_key': 'sk-944471ea4aef486ca2a82b2adf26c0cc',
+            'glm_api_key': '',
+            'glm_base_url': 'https://open.bigmodel.cn/api/paas/v4',
+            'openai_api_key': '',
+            'openai_base_url': 'https://api.openai.com/v1',
+            'qwen_api_key': '',
             'qwen_base_url': 'https://dashscope.aliyuncs.com/compatible-mode/v1'
         }
         cfg['Video watch'] = {

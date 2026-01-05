@@ -13,3 +13,6 @@ dashscope
 librosa>=0.10.0
 soundfile>=0.12.0
 # pyrubberband  # Optional: High-quality time-stretch (requires system librubberband)
+numpy
+requests
+oss2
